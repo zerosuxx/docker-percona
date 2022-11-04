@@ -20,9 +20,8 @@ RUN git clone --depth 1 -b release-$PERCONA_VERSION https://github.com/percona/p
 
 FROM debian
 
-RUN apt-get update && apt-get install -y libaio-dev libssl-dev libncurses5-dev libreadline-dev autoconf
-
-RUN apt-get clean autoclean \
+RUN apt-get update && apt-get install -y libaio-dev libssl-dev libncurses5-dev libreadline-dev autoconf \
+	&& apt-get clean autoclean \
 	&& apt-get autoremove --yes \
 	&& rm -rf /var/lib/{apt,dpkg,cache,log}/
 
@@ -36,6 +35,9 @@ RUN install -m 0775 -o mysql -g root -d /etc/mysql/conf.d /var/lib/mysql /var/ru
 RUN echo '!includedir /etc/mysql/conf.d' >> /etc/my.cnf \
 	&& chown -R mysql /var/lib/mysql /etc/mysql /etc/my.cnf
 
+RUN curl -fsL -o /docker-entrypoint.sh https://raw.githubusercontent.com/docker-library/mysql/master/8.0/docker-entrypoint.sh \
+	&& chmod +x /docker-entrypoint.sh
+
 USER mysql
 
 EXPOSE 3306
@@ -43,8 +45,6 @@ EXPOSE 3306
 ENV PATH=$PATH:/usr/local/mysql/bin:/usr/local/mysql/scripts
 
 VOLUME ["/var/lib/mysql", "/var/log/mysql"]
-
-COPY entrypoint.sh /docker-entrypoint.sh
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
