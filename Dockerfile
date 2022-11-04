@@ -15,12 +15,13 @@ RUN git clone --depth 1 -b release-$PERCONA_VERSION https://github.com/percona/p
 		-DWITH_EMBEDDED_SERVER=OFF \
 		-DIGNORE_AIO_CHECK=ON \
 		-DMYSQL_DATADIR=/var/lib/mysql \
+		-DFORCE_INSOURCE_BUILD=1 \
 	&& make \
 	&& make install
 
 FROM debian
 
-RUN apt-get update && apt-get install -y libaio-dev libssl-dev libncurses5-dev libreadline-dev autoconf \
+RUN apt-get update && apt-get install -y libaio-dev libssl-dev libncurses5-dev libreadline-dev autoconf curl \
 	&& apt-get clean autoclean \
 	&& apt-get autoremove --yes \
 	&& rm -rf /var/lib/{apt,dpkg,cache,log}/
