@@ -29,6 +29,7 @@ RUN git clone --depth 1 -b release-$PERCONA_VERSION https://github.com/percona/p
 		-DFORCE_INSOURCE_BUILD=1 \
 		-DDOWNLOAD_BOOST=1 \
 		-DWITH_BOOST=/tmp/boost \
+		-DWITH_ZLIB=bundled \
 	&& make \
 	&& make install
 
