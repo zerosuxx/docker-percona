@@ -13,7 +13,8 @@ RUN apt-get update && apt-get -y install \
 	libreadline-dev \
 	bison \
 	libssl-dev \
-	zlib1g-dev
+	zlib1g-dev \
+	pkg-config
 
 RUN git clone --depth 1 -b release-$PERCONA_VERSION https://github.com/percona/percona-server.git \
 	&& cd percona-server/ \
