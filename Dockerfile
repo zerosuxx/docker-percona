@@ -16,6 +16,8 @@ RUN git clone --depth 1 -b release-$PERCONA_VERSION https://github.com/percona/p
 		-DIGNORE_AIO_CHECK=ON \
 		-DMYSQL_DATADIR=/var/lib/mysql \
 		-DFORCE_INSOURCE_BUILD=1 \
+		-DDOWNLOAD_BOOST=1 \
+		-DWITH_BOOST=/tmp/boost \
 	&& make \
 	&& make install
 
