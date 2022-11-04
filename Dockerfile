@@ -2,7 +2,18 @@ FROM debian AS builder
 
 ARG PERCONA_VERSION="5.6.51-91.0"
 
-RUN apt-get update && apt-get -y install git cmake make gcc g++ libaio-dev libncurses5-dev libreadline-dev bison libssl-dev
+RUN apt-get update && apt-get -y install \
+	git \
+	cmake \
+	make \
+	gcc \
+	g++ \
+	libaio-dev \
+	libncurses5-dev \
+	libreadline-dev \
+	bison \
+	libssl-dev \
+	zlib1g-dev
 
 RUN git clone --depth 1 -b release-$PERCONA_VERSION https://github.com/percona/percona-server.git \
 	&& cd percona-server/ \
