@@ -14,7 +14,11 @@ RUN apt-get update && apt-get -y install \
 	bison \
 	libssl-dev \
 	zlib1g-dev \
-	pkg-config
+	pkg-config \
+	libldap-dev \
+	libsasl2-dev \
+	libsasl2-modules-gssapi-mit \
+	libkrb5-dev
 
 RUN git clone --depth 1 -b release-$PERCONA_VERSION https://github.com/percona/percona-server.git \
 	&& cd percona-server/ \
