@@ -18,7 +18,8 @@ RUN apt-get update && apt-get -y install \
 	libldap-dev \
 	libsasl2-dev \
 	libsasl2-modules-gssapi-mit \
-	libkrb5-dev
+	libkrb5-dev \
+	libcurl4-openssl-dev
 
 RUN git clone --depth 1 -b release-$PERCONA_VERSION https://github.com/percona/percona-server.git \
 	&& cd percona-server/ \
